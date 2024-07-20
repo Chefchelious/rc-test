@@ -13,7 +13,12 @@
     </p>
 
     <div class="card-gallery">
-      <div v-for="(photo, idx) in review.reviewImages.slice(0, 4)" :key="idx" class="gallery-photo">
+      <div
+        v-for="(photo, idx) in review.reviewImages.slice(0, 4)"
+        :key="idx"
+        class="gallery-photo"
+        @click="emit('open-thumbs-modal', review.reviewImages)"
+      >
         <img :src="photo" alt="gallery-photo" />
         <div v-if="idx === 3" class="backdrop-mini">
           <span class="extra-count">+{{ extraCounter }}</span>
@@ -40,6 +45,7 @@ import type { IReviewItem } from '@/types'
 import { computed } from 'vue'
 
 const props = defineProps<{ review: IReviewItem }>()
+const emit = defineEmits(['open-thumbs-modal'])
 
 const extraCounter = computed(() => {
   return props.review.reviewImages.length - props.review.reviewImages.slice(0, 4).length
