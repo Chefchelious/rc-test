@@ -58,6 +58,7 @@ const closeThumbsModal = () => {
 .reviews {
   background-color: white;
   padding: 35px 31px;
+  margin-bottom: 50px;
 }
 
 .title {

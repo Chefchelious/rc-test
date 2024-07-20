@@ -12,6 +12,8 @@ export interface IUser {
   profileImage: string
   name: string
   role: TUserRole
+  specialization?: string
+  rating?: number
 }
 
 export interface IReviewItem {

@@ -55,7 +55,7 @@ const setThumbsSwiper = (swiper: any) => {
 watch(
   () => props.isOpen,
   (v) => {
-    if (!v) thumbsSwiper.value = null // очистка свайпера, т.к. записывается инстанс свайпера и при открытии заново, предыдущий не работает
+    if (!v) thumbsSwiper.value = null
   }
 )
 </script>
