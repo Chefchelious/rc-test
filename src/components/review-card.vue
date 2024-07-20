@@ -2,30 +2,32 @@
   <div class="card">
     <div class="author">
       <div class="image-wrapper">
-        <img class="reviwer-img" :src="reviewPhoto" alt="reviewer" />
+        <img class="reviwer-img" :src="review.author.profileImage" alt="reviewer" />
       </div>
-      <span>Наталия Полянская</span>
+      <span>{{ review.author.name }}</span>
     </div>
 
     <h5 class="card-title"><span class="city-name">БАРСЕЛОНА</span> — О городе:</h5>
     <p class="card-content">
-      Барселона – моя третья большая любовь, после Вены и Крита. Это город, в который я каждый раз
-      возвращаюсь с огромным удовольствием, всем рекомендую хоть раз там побывать и осмотреть ...
+      {{ review.review }}
     </p>
 
     <div class="card-gallery">
-      <div v-for="(photo, idx) in gallery" :key="idx">
-        <img :src="photo" alt="gallary-photo" />
+      <div v-for="(photo, idx) in review.reviewImages.slice(0, 4)" :key="idx" class="gallery-photo">
+        <img :src="photo" alt="gallery-photo" />
+        <div v-if="idx === 3" class="backdrop-mini">
+          <span class="extra-count">+{{ extraCounter }}</span>
+        </div>
       </div>
     </div>
 
     <div class="card-footer">
       <p>
         <span>около 1 года назад</span>
-        <span>9 комментариев</span>
+        <span style="margin-right: 6px">{{ review.comments }} комментариев</span>
         <span class="like-section">
           <img :src="ICONS.likeIcon" alt="like" />
-          <span>9</span>
+          <span>{{ review.likes }}</span>
         </span>
       </p>
     </div>
@@ -33,17 +35,20 @@
 </template>
 
 <script setup lang="ts">
-import reviewPhoto from '@/assets/images/reviewer-photo.svg'
-import galleryFirst from '@/assets/images/gallery-1.jpg'
-import gallerySecond from '@/assets/images/gallery-2.jpg'
-import galleryThird from '@/assets/images/gallery-3.jpg'
 import { ICONS } from '@/composable/icons'
+import type { IReviewItem } from '@/types'
+import { computed } from 'vue'
 
-const gallery: string[] = [galleryFirst, gallerySecond, galleryThird, galleryThird]
+const props = defineProps<{ review: IReviewItem }>()
+
+const extraCounter = computed(() => {
+  return props.review.reviewImages.length - props.review.reviewImages.slice(0, 4).length
+})
 </script>
 
 <style scoped>
 .card {
+  height: 100%;
   width: 300px;
   background-color: #f9f7f2;
   padding: 26px 23px 26px 19px;
@@ -104,7 +109,7 @@ const gallery: string[] = [galleryFirst, gallerySecond, galleryThird, galleryThi
   align-items: center;
   font-size: 11px;
   color: #9d9d9d;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -113,12 +118,38 @@ const gallery: string[] = [galleryFirst, gallerySecond, galleryThird, galleryThi
   margin: 0 10px;
 }
 
+.card-footer p span:nth-child(2) {
+  margin-right: auto;
+}
+
 .like-section {
-  flex: 1;
   text-align: right;
+  white-space: nowrap;
 }
 
 .like-section img {
   margin-right: 4px;
+}
+
+.gallery-photo {
+  position: relative;
+}
+
+.backdrop-mini {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.201);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.extra-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: 600;
 }
 </style>

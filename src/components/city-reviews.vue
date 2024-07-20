@@ -12,40 +12,8 @@
       :modules="[Pagination]"
       class="mySwiper"
     >
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
-      </swiper-slide>
-
-      <swiper-slide>
-        <review-card />
+      <swiper-slide v-for="review in BARCELONAREVIEWS" :key="review.id">
+        <review-card :review="review" />
       </swiper-slide>
     </swiper>
 
@@ -62,6 +30,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css/pagination'
 import { Pagination } from 'swiper/modules'
 import 'swiper/swiper-bundle.css'
+import { BARCELONAREVIEWS } from '@/mokData'
 </script>
 
 <style scoped>
@@ -79,6 +48,7 @@ import 'swiper/swiper-bundle.css'
 
 .swiper-slide {
   width: 300px;
+  height: auto;
 }
 
 .all-reviews-btn {

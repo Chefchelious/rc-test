@@ -4,3 +4,22 @@ export interface ICityData {
   description: string
   gallery?: string[]
 }
+
+export type TUserRole = 'user' | 'admin'
+
+export interface IUser {
+  id: string
+  profileImage: string
+  name: string
+  role: TUserRole
+}
+
+export interface IReviewItem {
+  id: string
+  author: IUser
+  review: string
+  reviewImages: string[]
+  comments: number
+  likes: number
+  createdAt: string
+}
