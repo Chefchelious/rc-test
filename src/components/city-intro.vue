@@ -26,7 +26,8 @@ defineProps<{
 .city-intro {
   display: flex;
   align-items: center;
-  gap: 30px;
+  margin-bottom: 20px;
+  background-color: white;
 }
 
 .title {
@@ -38,13 +39,17 @@ defineProps<{
 
 .description {
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
   display: -webkit-box;
   -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 6px;
+}
+
+.right-col {
+  padding: 0 29px;
 }
 
 .link {

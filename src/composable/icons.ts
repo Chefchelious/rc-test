@@ -1,5 +1,5 @@
-import menuIcon from '@/assets/images/menu.svg'
+import likeIcon from '@/assets/images/like-icon.svg'
 
 export const ICONS: { [key: string]: string } = {
-  menuIcon
+  likeIcon
 }
