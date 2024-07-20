@@ -3,7 +3,6 @@
     <h2 class="title">Отзывы о Барселоне</h2>
 
     <swiper
-      @swiper="onSwiper"
       ref="mySwiper"
       :slides-per-view="'auto'"
       :space-between="20"
@@ -33,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import ReviewCard from '@/components/review-card.vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css/pagination'
@@ -42,13 +41,8 @@ import 'swiper/swiper-bundle.css'
 import { BARCELONAREVIEWS } from '@/mokData'
 import ThumbsGalleryModal from '@/components/thumbs-gallery-modal.vue'
 
-const swiperInstance = ref<any | null>(null)
 const isOpentThumbsModal = ref(false)
 const currentImages = ref<string[]>([])
-
-const onSwiper = (swiper: any) => {
-  swiperInstance.value = swiper
-}
 
 const openThumbsModal = (images: string[]) => {
   currentImages.value = images
@@ -58,12 +52,6 @@ const openThumbsModal = (images: string[]) => {
 const closeThumbsModal = () => {
   isOpentThumbsModal.value = false
 }
-
-onMounted(() => {
-  if (swiperInstance.value) {
-    swiperInstance.value.slideTo(1, 0, false)
-  }
-})
 </script>
 
 <style scoped>
