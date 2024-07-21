@@ -17,6 +17,10 @@
           slidesPerView: 1,
           spaceBetween: 10
         },
+        395: {
+          slidesPerView: 1.2,
+          spaceBetween: 40
+        },
         400: {
           slidesPerView: 'auto',
           spaceBetween: 10
