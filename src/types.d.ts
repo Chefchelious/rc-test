@@ -25,3 +25,10 @@ export interface IReviewItem {
   likes: number
   createdAt: string
 }
+
+export interface IMessageItem {
+  id: string
+  author: IUser
+  message: string
+  createdAt: string
+}

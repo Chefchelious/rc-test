@@ -1,173 +1,124 @@
 <template>
-  <h3 class="title">Чат с пользователем</h3>
+  <div class="chat-wrapper">
+    <h3 class="title">{{ title }}</h3>
 
-  <div class="chat">
-    <div class="chat-header">
-      <div class="img-wrapper">
-        <img class="img" :src="profileImage" alt="profile-img" />
-      </div>
-      <div class="user-initials">
-        <p>Наталия Полянская</p>
-        <p><img :src="ICONS.flagIcon" alt="flag" /> Гид по Баварии, фотограф</p>
+    <div class="chat">
+      <div class="chat-header">
+        <div class="img-wrapper">
+          <img class="img" :src="recipient.profileImage" alt="profile-img" />
+        </div>
+        <div v-if="recipient.specialization" class="user-initials">
+          <p>{{ recipient.name }}</p>
+          <p><img :src="ICONS.flagIcon" alt="flag" /> {{ recipient.specialization }}</p>
+        </div>
+
+        <div v-if="recipient.rating" class="star-rating">
+          <button v-for="(star, index) in 5" :key="index">
+            <img :src="getStarIcon(index + 1, recipient.rating)" alt="star" />
+          </button>
+        </div>
       </div>
 
-      <div class="star-rating">
-        <button>
-          <img :src="ICONS.filledStarIcon" alt="star" />
-        </button>
-        <button>
-          <img :src="ICONS.filledStarIcon" alt="star" />
-        </button>
-        <button>
-          <img :src="ICONS.filledStarIcon" alt="star" />
-        </button>
-        <button>
-          <img :src="ICONS.filledStarIcon" alt="star" />
-        </button>
-        <button>
-          <img :src="ICONS.emptyStarIcon" alt="star" />
-        </button>
+      <div class="chat-container scrollbar-style">
+        <div class="message-list">
+          <div
+            v-for="message in messages"
+            :key="message.id"
+            class="message-wrapper"
+            :class="{ 'sender-message': message.author.id === getCurrentUserId() }"
+          >
+            <div class="img-wrapper">
+              <img class="img" :src="message.author.profileImage" alt="profile-img" />
+            </div>
+
+            <div class="message">
+              <p>
+                {{ message.message }}
+              </p>
+              <span>{{ message.createdAt }}</span>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <form class="chat-form" @submit.prevent="sendMessage">
+        <div class="img-wrapper">
+          <img
+            class="img"
+            :src="isAdminChat ? user.profileImage : ADMIN.profileImage"
+            alt="profile-img"
+          />
+        </div>
+
+        <div class="input-wrapper">
+          <input v-model="message" class="input" type="text" placeholder="Напишите сообщение..." />
+          <span :class="['helper-text', { 'helper-text-active': isValidationError }]"
+            >обязательное поле</span
+          >
+        </div>
+
+        <button class="send-btn">
+          <img :src="ICONS.sendIcon" alt="send" />
+        </button>
+      </form>
     </div>
-
-    <div class="chat-container scrollbar-style">
-      <div class="message-list">
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-
-        <div class="message-wrapper">
-          <div class="img-wrapper">
-            <img class="img" :src="profileImage" alt="profile-img" />
-          </div>
-
-          <div class="message">
-            <p>
-              Из достопримечательностей могу предложить обратить внимание на вулкан Майон,
-              путешествие запомнится вам надолго хотя бы из-за невероятной сложности подъема на
-              него. Поверьте, это стоит того; также хотелf бы отметить очень важную область
-              исследования
-            </p>
-            <span>Вчера в 17:45</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <form class="chat-form" @submit.prevent>
-      <div class="img-wrapper">
-        <img class="img" :src="profileImage" alt="profile-img" />
-      </div>
-
-      <div class="input-wrapper">
-        <input class="input" type="text" placeholder="Напишите сообщение..." />
-      </div>
-
-      <button class="send-btn">
-        <img :src="ICONS.sendIcon" alt="send" />
-      </button>
-    </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import profileImage from '@/assets/images/reviewer-photo.svg'
+import { ref } from 'vue'
 import { ICONS } from '@/composable/icons'
+import type { IMessageItem, IUser } from '@/types'
+import { getStarIcon } from '@/composable/utils'
+import { useChatStore } from '@/stores/chat-store'
+import { storeToRefs } from 'pinia'
+import { ADMIN } from '@/mokData'
+
+const props = withDefaults(
+  defineProps<{
+    title: string
+    user: IUser
+    isAdminChat?: boolean
+  }>(),
+  {
+    isAdminChat: false
+  }
+)
+
+const message = ref('')
+const isValidationError = ref(false)
+const messageStore = useChatStore()
+const { messages } = storeToRefs(messageStore)
+
+const recipient = ref<IUser>(props.isAdminChat ? ADMIN : props.user)
+
+const getCurrentUserId = () => {
+  return props.isAdminChat ? props.user.id : ADMIN.id
+}
+
+const sendMessage = () => {
+  isValidationError.value = false
+
+  if (!message.value.trim()) return (isValidationError.value = true)
+
+  const messageItem: IMessageItem = {
+    id: String(Date.now()),
+    author: props.isAdminChat ? props.user : ADMIN,
+    message: message.value,
+    createdAt: new Date().toISOString()
+  }
+
+  messageStore.addNewMessage(messageItem)
+
+  message.value = ''
+}
 </script>
 
 <style scoped>
+.chat-wrapper {
+  flex: 1;
+}
+
 .title {
   font-size: 29px;
   font-weight: bold;
@@ -178,7 +129,6 @@ import { ICONS } from '@/composable/icons'
 .chat {
   position: relative;
   background-color: white;
-  width: 415px;
 }
 
 .chat-header {
@@ -262,6 +212,11 @@ import { ICONS } from '@/composable/icons'
   display: flex;
   gap: 19px;
   align-items: flex-start;
+  padding: 14px;
+}
+
+.sender-message {
+  background-color: #f9f7f2;
 }
 
 .message-wrapper .img-wrapper {
@@ -292,6 +247,7 @@ import { ICONS } from '@/composable/icons'
 
 .input-wrapper {
   flex: 1;
+  position: relative;
 }
 
 .input {
@@ -306,5 +262,25 @@ import { ICONS } from '@/composable/icons'
 
 .input:focus {
   outline-color: rgb(0, 102, 255);
+}
+
+.helper-text {
+  position: absolute;
+  left: 0;
+  bottom: 0px;
+  font-size: 12px;
+  color: red;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    bottom 0.3s ease;
+}
+
+.helper-text-active {
+  bottom: -20px;
+  opacity: 1;
+  transform: translateY(0);
 }
 </style>

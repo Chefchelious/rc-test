@@ -1,9 +1,10 @@
-import type { ICityData, IReviewItem } from './types'
+import type { ICityData, IReviewItem, IUser } from './types'
 import barcelonaImg from '@/assets/images/barcelona_spain.jpg'
 import profileImage from '@/assets/images/reviewer-photo.svg'
 import galleryFirst from '@/assets/images/gallery-1.jpg'
 import gallerySecond from '@/assets/images/gallery-2.jpg'
 import galleryThird from '@/assets/images/gallery-3.jpg'
+import adminPhoto from '@/assets/images/admin-photo.jpg'
 
 export const CITY: ICityData = {
   title: 'Барселона — обзор города',
@@ -74,3 +75,20 @@ export const BARCELONAREVIEWS: IReviewItem[] = [
     createdAt: '2024-07-20T00:00:00Z'
   }
 ]
+
+export const USER: IUser = {
+  id: '2245',
+  profileImage: profileImage,
+  name: 'Наталия Полянская',
+  role: 'user',
+  specialization: 'Гид по Баварии, фотограф',
+  rating: 4
+}
+
+export const ADMIN: IUser = {
+  id: '777767',
+  profileImage: adminPhoto,
+  name: 'Администратор',
+  role: 'admin',
+  specialization: 'TravelAsk'
+}
