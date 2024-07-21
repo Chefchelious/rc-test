@@ -24,4 +24,15 @@ import { USER } from '@/mokData'
   background-color: #cccccc;
   height: auto;
 }
+
+@media screen and (max-width: 880px) {
+  .chat-section {
+    flex-direction: column;
+  }
+
+  .separator[data-v-6ad41b84] {
+    width: 100%;
+    height: 3px;
+  }
+}
 </style>

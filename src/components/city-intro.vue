@@ -67,4 +67,19 @@ defineProps<{
   height: 2px;
   background-color: #ff4641;
 }
+
+@media screen and (max-width: 768px) {
+  .city-intro {
+    flex-direction: column;
+  }
+
+  .left-col img {
+    width: 100%;
+    height: auto;
+  }
+
+  .right-col {
+    margin-bottom: 26px;
+  }
+}
 </style>

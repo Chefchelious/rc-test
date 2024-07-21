@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import ProfileImage from '@/components/pfofile-image.vue'
 import { getMessageDate } from '@/composable/utils'
 import type { IMessageItem } from '@/types'
 
