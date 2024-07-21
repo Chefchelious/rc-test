@@ -1,39 +1,37 @@
-# quizz-app
+<h3>Тестовое задание Rocket Science</h3>
 
-This template should help get you started developing with Vue 3 in Vite.
+vue 3, стейт-менеджер pinia, typescript, eslint и prettier setup
 
-## Recommended IDE Setup
+Иструкции по запуску:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. Клонировать репо https://github.com/Chefchelious/rc-test.git
 
-## Type Support for `.vue` Imports in TS
+2. В корне проетка установить зависимости - npm i
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+3. Запустить проект - npm run dev
 
-## Customize configuration
+Открыть в браузере ссылку - http://localhost:5173/
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Рекомендуемые инструменты разработчика:
 
-## Project Setup
+VSCode + Volar (and disable Vetur).
 
-```sh
-npm install
-```
+<h3>Eng description</h3>
 
-### Compile and Hot-Reload for Development
+Test Assignment Rocket Science
 
-```sh
-npm run dev
-```
+Technologies: Vue 3, Pinia (state manager), TypeScript, ESLint, and Prettier setup
 
-### Type-Check, Compile and Minify for Production
+Instructions for Running:
 
-```sh
-npm run build
-```
+Clone the repository: https://github.com/Chefchelious/rc-test.git
 
-### Lint with [ESLint](https://eslint.org/)
+Install dependencies in the project root: npm i
 
-```sh
-npm run lint
-```
+Start the project: npm run dev
+
+Open the browser and go to the following link: http://localhost:5173/
+
+Recommended Development Tools:
+
+VSCode + Volar (and disable Vetur).
