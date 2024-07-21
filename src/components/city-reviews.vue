@@ -12,6 +12,24 @@
       }"
       :modules="[Pagination]"
       class="mySwiper"
+      :breakpoints="{
+        375: {
+          slidesPerView: 1,
+          spaceBetween: 10
+        },
+        400: {
+          slidesPerView: 'auto',
+          spaceBetween: 10
+        },
+        768: {
+          slidesPerView: 'auto',
+          spaceBetween: 15
+        },
+        1024: {
+          slidesPerView: 'auto',
+          spaceBetween: 20
+        }
+      }"
     >
       <swiper-slide v-for="review in BARCELONAREVIEWS" :key="review.id">
         <review-card :review="review" @open-thumbs-modal="openThumbsModal" />
