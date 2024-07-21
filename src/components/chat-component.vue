@@ -4,9 +4,7 @@
 
     <div class="chat">
       <div class="chat-header">
-        <div class="img-wrapper">
-          <img class="img" :src="recipient.profileImage" alt="profile-img" />
-        </div>
+        <profile-image :image-path="recipient.profileImage" />
         <div v-if="recipient.specialization" class="user-initials">
           <p>{{ recipient.name }}</p>
           <p><img :src="ICONS.flagIcon" alt="flag" /> {{ recipient.specialization }}</p>
@@ -27,28 +25,20 @@
             class="message-wrapper"
             :class="{ 'sender-message': message.author.id === getCurrentUserId() }"
           >
-            <div class="img-wrapper">
-              <img class="img" :src="message.author.profileImage" alt="profile-img" />
-            </div>
+            <profile-image :image-path="message.author.profileImage" />
 
             <div class="message">
               <p>
                 {{ message.message }}
               </p>
-              <span>{{ message.createdAt }}</span>
+              <span>{{ getMessageDate(message.createdAt) }}</span>
             </div>
           </div>
         </div>
       </div>
 
       <form class="chat-form" @submit.prevent="sendMessage">
-        <div class="img-wrapper">
-          <img
-            class="img"
-            :src="isAdminChat ? user.profileImage : ADMIN.profileImage"
-            alt="profile-img"
-          />
-        </div>
+        <profile-image :image-path="isAdminChat ? user.profileImage : ADMIN.profileImage" />
 
         <div class="input-wrapper">
           <input v-model="message" class="input" type="text" placeholder="Напишите сообщение..." />
@@ -68,11 +58,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ICONS } from '@/composable/icons'
+import { getMessageDate } from '@/composable/utils'
 import type { IMessageItem, IUser } from '@/types'
 import { getStarIcon } from '@/composable/utils'
 import { useChatStore } from '@/stores/chat-store'
 import { storeToRefs } from 'pinia'
 import { ADMIN } from '@/mokData'
+import ProfileImage from '@/components/pfofile-image.vue'
 
 const props = withDefaults(
   defineProps<{
@@ -145,18 +137,6 @@ const sendMessage = () => {
   margin-left: auto;
 }
 
-.img-wrapper {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.img {
-  width: 100%;
-  height: auto;
-}
-
 .user-initials p:first-child {
   font-size: 18px;
   line-height: 18px;
@@ -217,10 +197,6 @@ const sendMessage = () => {
 
 .sender-message {
   background-color: #f9f7f2;
-}
-
-.message-wrapper .img-wrapper {
-  flex-shrink: 0;
 }
 
 .message-wrapper + .message-wrapper {
