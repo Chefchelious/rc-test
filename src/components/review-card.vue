@@ -139,6 +139,16 @@ const extraCounter = computed(() => {
 
 .gallery-photo {
   position: relative;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.gallery-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .backdrop-mini {

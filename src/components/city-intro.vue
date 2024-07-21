@@ -82,4 +82,11 @@ defineProps<{
     margin-bottom: 26px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .title {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+}
 </style>

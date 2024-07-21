@@ -87,13 +87,8 @@ watch(
   object-fit: cover;
 }
 
-body {
-  background: #000;
-  color: #000;
-}
-
 .mySwiper2 {
-  height: 50vh;
+  height: 70vh;
   width: 100%;
 }
 
@@ -117,5 +112,11 @@ body {
 
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
+}
+
+@media screen and (max-width: 450px) {
+  .mySwiper2 {
+    height: 40vh;
+  }
 }
 </style>

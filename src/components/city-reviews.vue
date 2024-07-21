@@ -136,4 +136,16 @@ const closeThumbsModal = () => {
   background: #ff4641;
   opacity: 1;
 }
+
+@media screen and (max-width: 450px) {
+  .reviews {
+    padding: 16px;
+    margin-bottom: 22px;
+  }
+
+  .title {
+    margin-bottom: 16px;
+    font-size: 22px;
+  }
+}
 </style>

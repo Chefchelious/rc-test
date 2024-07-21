@@ -51,7 +51,7 @@ watch(
 
 .modal-content {
   overflow: auto;
-  width: 60%;
+  width: 95%;
   background: white;
   padding: 20px;
   border-radius: 5px;

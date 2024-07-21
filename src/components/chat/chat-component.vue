@@ -5,7 +5,11 @@
     <div class="chat">
       <div class="chat-header">
         <profile-image :image-path="recipient.profileImage" />
-        <div v-if="recipient.specialization" class="user-initials">
+        <div
+          v-if="recipient.specialization"
+          class="user-initials"
+          :class="{ specialization: recipient.role !== 'admin' && recipient.specialization }"
+        >
           <p>{{ recipient.name }}</p>
           <p><img :src="ICONS.flagIcon" alt="flag" /> {{ recipient.specialization }}</p>
         </div>
@@ -222,5 +226,26 @@ const sendMessage = () => {
   bottom: -20px;
   opacity: 1;
   transform: translateY(0);
+}
+
+@media screen and (max-width: 450px) {
+  .title {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  .chat-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .specialization.user-initials {
+    order: 2;
+    width: 100%;
+  }
+
+  .specialization.star-rating {
+    order: 1;
+  }
 }
 </style>
