@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import ChatComponent from '@/components/chat-component.vue'
+import ChatComponent from '@/components/chat/chat-component.vue'
 import { USER } from '@/mokData'
 </script>
 
