@@ -1,5 +1,7 @@
 <h3>Тестовое задание Rocket Science</h3>
 
+netlify deploy - https://barcelona-landing.netlify.app/
+
 vue 3, стейт-менеджер pinia, typescript, eslint и prettier setup
 
 Иструкции по запуску:
